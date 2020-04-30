@@ -6,12 +6,14 @@ import math
 
 
 def cleanse_data(df):
-    # Your task here is to remove data from any ticker that isn't XXY, sort chronologically and return a dataframe
-    # whose only column is 'Adj Close'
     dfclean = df
+    dfclean = dfclean[dfclean.Ticker == 'XXY']
+    dfclean.sort_values(by=['Date'], ascending = True)
+    dfclean = dfclean.drop(columns = ['Date','Ticker'])
     return dfclean
-
-
+import statistics
+def Average(lst): 
+    return sum(lst) / len(lst)
 def mc_sim(sims, days, df):
     # The code for a crude monte carlo simulation is given below. Your job is to extract the mean expected price
     # on the last day, as well as the 95% confidence interval.
@@ -35,11 +37,15 @@ def mc_sim(sims, days, df):
             price_series.append(price)
             count += 1
 
-        simulation_df[x] = price_series
-
-    # FILL OUT THE REST OF THE CODE. The above code has given you 'sims' of simulations run 'days' days into the future.
-    # Your task is to return the expected price on the last day +/- one standard deviation.
-    return
+                simulation_df[x] = [float(n) for n in price_series]
+      price_series_updated = [float(n) for n in price_series]
+      mean_closing_value = Average(price_series_updated
+      std_dev = statistics.pstdev(price_series_updated)
+      #x is the list of values with +/- 1 Stv dev from the mean last day price
+      #y is the range of values for a 95% confidence interval                             
+      x = [mean_closing_value - std_dev,mean_closing_value + std_dev]
+      y = [mean_closing_value - (2*std_dev),mean_closing_value + (2*std_dev)]
+      return x 
 
 def main():
     filename = '20192020histdata.csv'
