@@ -45,6 +45,7 @@ def mc_sim(sims, days, df):
       #y is the range of values for a 95% confidence interval                             
       x = [mean_closing_value - std_dev,mean_closing_value + std_dev]
       y = [mean_closing_value - (2*std_dev),mean_closing_value + (2*std_dev)]
+      print(mean_closing_value)
       return x 
 
 def main():
